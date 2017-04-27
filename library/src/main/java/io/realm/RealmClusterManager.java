@@ -38,15 +38,16 @@ public class RealmClusterManager<M extends RealmObject & ClusterItem>
     }
 
     public void updateRealmResults(RealmResults<M> realmResults) {
-        super.clearItems();
+        clearItems();
         if (realmResults == null || !realmResults.isValid() || !realmResults.isLoaded()) return;
 
         List<RealmClusterItem<M>> items = new ArrayList<>(realmResults.size());
         for (M item : realmResults) {
-            if (item.getPosition() != null) {
-                items.add(new RealmClusterItem<M>(item));
+            if (item.isValid() && item.getPosition() != null) {
+                items.add(new RealmClusterItem<>(item));
             }
         }
         super.addItems(items);
+        cluster();
     }
 }
