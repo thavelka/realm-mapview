@@ -1,9 +1,10 @@
 ## A MapView that is powered by Realm
 
-A simple, yet powerful wrapper around the `SupportMapFragment` with support for clustering and built-in support for querying and rendering a Realm results.
+A simple, yet powerful wrapper around the `MapView` with support for clustering and built-in support for querying and rendering a Realm results.
 
-##How To Include It:
+## How To Include It:
 
+In project build.gradle:
 ```
 	repositories {
         // ...
@@ -11,46 +12,20 @@ A simple, yet powerful wrapper around the `SupportMapFragment` with support for 
     }
 ```
 
+In app module build.gradle:
 ```
 	dependencies {
-	        compile 'com.github.thorbenprimke:realm-mapview:0.9.2'
+	        compile 'com.github.thavelka:realm-mapview:1.0.0'
 	}
 ```
 
-##Demo
+## Demo
 
 ![Screenshot](https://raw.githubusercontent.com/thorbenprimke/realm-mapview/master/extra/screenshot-demo-app.gif)
 
 ## How To Get Started:
 
-Using the `RealmClusterMapFragment` is as simple as extending it and implementing three methods. The following is an example:
-
-```
-public class BusinessRealmClusterMapFragment extends
-    RealmClusterMapFragment<Business> {
-
-    @Override
-    protected String getTitleColumnName() {
-        return "name";
-    }
-
-    @Override
-    protected String getLatitudeColumnName() {
-        return "latitude";
-    }
-
-    @Override
-    protected String getLongitudeColumnName() {
-        return "longitude";
-    }
-}
-```
-
-The fragment loads data from the Realm of type `Business` and the provided columnNames are used to look up the latitude, longitude and the marker's title.
-
-All that's left at this point, is to include the fragment in your Activity's layout file or create it programmatically.
-
-##Other:
+## Other:
 
 Your projects's `AndroidManifest` has to include the following valid Map V2 key. You can obtain a key from [Google Developer Console](https://developers.google.com/maps/documentation/android-api/)
 
