@@ -2,8 +2,8 @@
 
 A simple, yet powerful wrapper around the `MapView` that renders a RealmResults with support for clustering and real-time updates.
 
-## How To Include It:
-
+## How to get it:
+[![](https://jitpack.io/v/thavelka/realm-mapview.svg)](https://jitpack.io/#thavelka/realm-mapview)  
 In project build.gradle:
 ```
 	repositories {
@@ -15,7 +15,7 @@ In project build.gradle:
 In app module build.gradle:
 ```
 	dependencies {
-	        compile 'com.github.thavelka:realm-mapview:1.0.0'
+	        compile 'com.github.thavelka:realm-mapview:1.0.1'
 	}
 ```
 
