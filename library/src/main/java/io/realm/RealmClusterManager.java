@@ -9,7 +9,9 @@ import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * An implementation of the {@link ClusterManager} that handles processing a {@link RealmResults}
@@ -17,6 +19,8 @@ import java.util.List;
  */
 public class RealmClusterManager<M extends RealmObject & ClusterItem>
         extends ClusterManager<RealmClusterItem<M>> {
+
+    private Map<M, RealmClusterItem<M>> itemMap = new HashMap<>();
 
     public RealmClusterManager(Context context, GoogleMap map) {
         super(context, map);
@@ -36,14 +40,21 @@ public class RealmClusterManager<M extends RealmObject & ClusterItem>
         throw new IllegalStateException("Use addRealmResultItems instead");
     }
 
+    public RealmClusterItem<M> getClusterItem(M item) {
+        return itemMap.get(item);
+    }
+
     public void updateRealmResults(RealmResults<M> realmResults) {
         clearItems();
+        itemMap.clear();
         if (realmResults == null || !realmResults.isValid() || !realmResults.isLoaded()) return;
 
         List<RealmClusterItem<M>> items = new ArrayList<>(realmResults.size());
         for (M item : realmResults) {
             if (item.isValid() && item.getPosition() != null) {
-                items.add(new RealmClusterItem<>(item));
+                RealmClusterItem<M> clusterItem = new RealmClusterItem<>(item);
+                items.add(clusterItem);
+                itemMap.put(item, clusterItem);
             }
         }
         super.addItems(items);
