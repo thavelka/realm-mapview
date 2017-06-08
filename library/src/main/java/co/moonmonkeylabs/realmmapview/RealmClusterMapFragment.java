@@ -172,7 +172,7 @@ public abstract class RealmClusterMapFragment<M extends RealmObject & ClusterIte
      * Override if a custom {@link ClusterRenderer} is desired.
      */
     protected ClusterRenderer<RealmClusterItem<M>> getClusterRenderer
-    (Context context, GoogleMap map, ClusterManager<RealmClusterItem<M>> manager) {
+    (Context context, GoogleMap map, RealmClusterManager<M> manager) {
         DefaultClusterRenderer<RealmClusterItem<M>> renderer =
                 new DefaultClusterRenderer<>(context, map, manager);
         renderer.setMinClusterSize(getDefaultMinClusterSize());
@@ -180,7 +180,7 @@ public abstract class RealmClusterMapFragment<M extends RealmObject & ClusterIte
     }
 
     /**
-     * Override if a custom {@link ClusterManager} is desired. The renderer will be set in
+     * Override if a custom {@link RealmClusterManager} is desired. The renderer will be set in
      * {@link #onMapReady}, so override {@link #getClusterRenderer} to set a custom renderer.
      */
     protected RealmClusterManager<M> getClusterManager(Context context, GoogleMap googleMap) {
