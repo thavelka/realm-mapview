@@ -1,2 +1,1 @@
-include ':library', ':demo'
-project(':demo').projectDir = new File('demo')
+include ':demo', ':library'
