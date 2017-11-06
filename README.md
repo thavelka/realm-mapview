@@ -15,7 +15,7 @@ In project build.gradle:
 In app module build.gradle:
 ```
 	dependencies {
-	        compile 'com.github.thavelka:realm-mapview:1.0.1'
+	        compile 'com.github.thavelka:realm-mapview:1.2.0'
 	}
 ```
 
@@ -95,7 +95,7 @@ getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment)
 That's it! The fragment will handle showing the markers on the map, clustering, and updating the map when the content of the RealmResults changes.
 
 ## Customization:
-You can customize the appearance, features, and behavior of the map by overriding methods in your RealmClusterMapFragment. To see what's possible, read through the [`RealmClusterMapFragment` source](./library/src/main/java/co/moonmonkeylabs/realmmapview/RealmClusterMapFragment.java) and [sample project code](./example/app/src/main/java/co/moonmonkeylabs/realmmap/example).
+You can customize the appearance, features, and behavior of the map by overriding methods in your RealmClusterMapFragment. To see what's possible, read through the [`RealmClusterMapFragment` source](./library/src/main/java/co/moonmonkeylabs/realmmapview/RealmClusterMapFragment.java) and [sample project code](./demo/src/main/java/co/moonmonkeylabs/realmmap/example).
 Here are just a few possibilities: 
 * Render as a satellite map
 * Show user's location
