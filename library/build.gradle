@@ -26,13 +26,3 @@ dependencies {
     compile 'com.google.maps.android:android-maps-utils:0.5'
     compile 'com.google.android.gms:play-services-maps:11.4.2'
 }
-
-// build a jar with source files
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-artifacts {
-    archives sourcesJar
-}
