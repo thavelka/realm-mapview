@@ -8,7 +8,6 @@ import com.google.maps.android.clustering.ClusterItem;
 import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,16 +27,6 @@ public class RealmClusterManager<M extends RealmObject & ClusterItem>
 
     public RealmClusterManager(Context context, GoogleMap map, MarkerManager markerManager) {
         super(context, map, markerManager);
-    }
-
-    @Override
-    public void addItems(Collection<RealmClusterItem<M>> items) {
-        throw new IllegalStateException("Use updateRealmResults instead");
-    }
-
-    @Override
-    public void addItem(RealmClusterItem<M> myItem) {
-        throw new IllegalStateException("Use addRealmResultItems instead");
     }
 
     public RealmClusterItem<M> getClusterItem(M item) {
