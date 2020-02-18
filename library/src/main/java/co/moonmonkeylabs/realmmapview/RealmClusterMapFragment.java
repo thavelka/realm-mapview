@@ -266,7 +266,7 @@ public abstract class RealmClusterMapFragment<M extends RealmObject & ClusterIte
         map = googleMap;
 
         // Set up cluster manager and renderer
-        manager = new RealmClusterManager<>(getActivity(), map);
+        manager = getClusterManager(getActivity(), map);
         manager.setRenderer(getClusterRenderer(getActivity(), map, manager));
 
         realmResults = getRealmResults();
