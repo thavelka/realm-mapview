@@ -2,6 +2,7 @@ package co.moonmonkeylabs.realmmapview;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -136,6 +137,29 @@ public abstract class RealmClusterMapFragment<M extends RealmObject & ClusterIte
      * {@link ClusterItem}.
      */
     protected abstract RealmResults<M> getRealmResults();
+
+    /**
+     * Changes the data set and updates the map.
+     * @param results The new RealmResults to display on the map.
+     */
+    protected void setRealmResults(@NonNull RealmResults<M> results) {
+        if (realmResults != null && changeListener != null) {
+            realmResults.removeChangeListener(changeListener);
+        }
+
+        realmResults = results;
+
+        // Set change listener on results
+        if (changeListener == null) {
+            changeListener = new RealmChangeListener<RealmResults<M>>() {
+                @Override
+                public void onChange(RealmResults<M> element) {
+                    notifyDataSetChanged();
+                }
+            };
+        }
+        realmResults.addChangeListener(changeListener);
+    }
 
     /**
      * Override to set custom options for the map before it is created.
