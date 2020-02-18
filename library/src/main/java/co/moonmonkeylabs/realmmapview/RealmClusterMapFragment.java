@@ -2,6 +2,7 @@ package co.moonmonkeylabs.realmmapview;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -138,6 +139,30 @@ public abstract class RealmClusterMapFragment<M extends RealmObject & ClusterIte
     protected abstract RealmResults<M> getRealmResults();
 
     /**
+     * Changes the data set and updates the map.
+     * @param results The new RealmResults to display on the map.
+     */
+    protected void setRealmResults(@NonNull RealmResults<M> results) {
+        if (realmResults != null && changeListener != null) {
+            realmResults.removeChangeListener(changeListener);
+        }
+
+        realmResults = results;
+
+        // Set change listener on results
+        if (changeListener == null) {
+            changeListener = new RealmChangeListener<RealmResults<M>>() {
+                @Override
+                public void onChange(RealmResults<M> element) {
+                    notifyDataSetChanged();
+                }
+            };
+        }
+        realmResults.addChangeListener(changeListener);
+        notifyDataSetChanged();
+    }
+
+    /**
      * Override to set custom options for the map before it is created.
      * UI options such as enabling/disabling controls and gestures go here. For a full list of
      * options, see <a href="https://goo.gl/HP1bjC">GoogleMapOptions documentation</a>.
@@ -241,7 +266,7 @@ public abstract class RealmClusterMapFragment<M extends RealmObject & ClusterIte
         map = googleMap;
 
         // Set up cluster manager and renderer
-        manager = new RealmClusterManager<>(getActivity(), map);
+        manager = getClusterManager(getActivity(), map);
         manager.setRenderer(getClusterRenderer(getActivity(), map, manager));
 
         realmResults = getRealmResults();
