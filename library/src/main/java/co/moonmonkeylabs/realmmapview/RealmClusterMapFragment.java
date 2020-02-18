@@ -159,6 +159,7 @@ public abstract class RealmClusterMapFragment<M extends RealmObject & ClusterIte
             };
         }
         realmResults.addChangeListener(changeListener);
+        notifyDataSetChanged();
     }
 
     /**
